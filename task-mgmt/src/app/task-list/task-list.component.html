@@ -1,0 +1,49 @@
+<div>
+  <h2>Task List</h2>
+  <table class="task-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Completed</th>
+        <th>Actions</th>
+        <th>Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{ task.id }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.completed ? 'Yes' : 'No' }}</td>
+        <td>
+          <button (click)="task.id !== undefined && toggleCompletion(task.id)">Toggle</button>
+        </td>
+        <td>
+          <button (click)="openUpdateForm(task)">Update</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Update Form Modal -->
+<div *ngIf="selectedTask" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeUpdateForm()">&times;</span>
+    <h3>Update Task</h3>
+    <form (ngSubmit)="submitUpdate()">
+      <label for="title">Title:</label>
+      <input type="text" id="title" [(ngModel)]="selectedTask.title" name="title" required>
+
+      <label for="description">Description:</label>
+      <textarea id="description" [(ngModel)]="selectedTask.description" name="description" required></textarea>
+
+      <label for="completed">Completed:</label>
+      <input type="checkbox" id="completed" [(ngModel)]="selectedTask.completed" name="completed">
+
+      <button type="submit">Update</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+/* Ensure that the item is visible */
+div {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+  }
+  
